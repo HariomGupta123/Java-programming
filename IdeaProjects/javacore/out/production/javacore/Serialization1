@@ -1,0 +1,43 @@
+import java.io.*;
+
+class Person{
+    String Name;
+    int id;
+    Person(String name,int id){
+        this.Name=name;
+        this.id=id;
+    }
+}
+class Student extends Person{
+    String course;
+    int fee;
+    public Student(String name,int id,String course,int fee){
+        super(name,id);
+        this.course=course;
+        this.fee=fee;
+    }
+}
+public class SerializationSD {
+    public void main(String[] args){
+        Student s1=new Student("hari",877,"science",5000);
+
+        try {
+           FileOutputStream fout = new FileOutputStream("Hari.txt");
+           ObjectOutputStream out=new ObjectOutputStream(fout);
+           out.writeObject(s1);
+           out.flush();
+           out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectInputStream out=new ObjectInputStream(new FileInputStream("Hari.txt"));
+            Student s=(Student)in.readObject();
+            System.out.println(s.Name+""+s.id+""+s.course+""+s.fee);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
